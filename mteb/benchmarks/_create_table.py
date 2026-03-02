@@ -15,16 +15,15 @@ if TYPE_CHECKING:
 
 
 def _borda_count(scores: pd.Series) -> pd.Series:
-    n = len(scores)
-    ranks = scores.rank(method="average", ascending=False)
-    counts = n - ranks
-    return counts
+    ranks = scores.rank(method="average", ascending=False, na_option="bottom")
+    return ranks
 
 
-def _get_borda_rank(score_table: pd.DataFrame) -> pd.Series:
+def _get_borda_rank(score_table: pd.DataFrame) -> tuple[pd.Series, pd.Series]:
     borda_counts = score_table.apply(_borda_count, axis="index")
     mean_borda = borda_counts.sum(axis=1)
-    return mean_borda.rank(method="min", ascending=False).astype(int)
+    mean_rank = borda_counts.mean(axis=1).round(2)
+    return mean_borda.rank(method="min", ascending=True).astype(int), mean_rank
 
 
 def _split_on_capital(s: str) -> str:
@@ -121,7 +120,9 @@ def _create_summary_table_from_benchmark_results(
     joint_table = mean_per_type.copy()
     joint_table.insert(0, "mean", overall_mean)
     joint_table.insert(1, "mean_by_task_type", typed_mean)
-    joint_table["borda_rank"] = _get_borda_rank(per_task)
+    borda_rank, mean_rank = _get_borda_rank(per_task)
+    joint_table["borda_rank"] = borda_rank
+    joint_table["mean_rank"] = mean_rank
     joint_table = joint_table.sort_values("borda_rank", ascending=True)
     joint_table = joint_table.reset_index()
 
@@ -186,6 +187,7 @@ def _create_summary_table_from_benchmark_results(
 
     # Move borda rank to front
     joint_table.insert(0, "Rank (Borda)", joint_table.pop("borda_rank"))
+    joint_table.insert(1, "Mean Rank", joint_table.pop("mean_rank"))
 
     return joint_table
 

@@ -643,7 +643,7 @@ class ModelMeta(BaseModel):
         card_data = card.data
         card_data = cast("ModelCardData", card_data)
         try:
-            model_config = AutoConfig.from_pretrained(model_name)
+            model_config = AutoConfig.from_pretrained(model_name, trust_remote_code=True)
         except Exception as e:
             # some models can't load AutoConfig (e.g. `average_word_embeddings_levy_dependency`)
             model_config = None
