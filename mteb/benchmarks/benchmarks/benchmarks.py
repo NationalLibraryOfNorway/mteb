@@ -3255,3 +3255,109 @@ MAEB = Benchmark(
     citation="",
     contacts=["AdnanElAssadi56", "isaac-chung", "KennethEnevoldsen", "Samoed"],
 )
+
+
+SEB2 = Benchmark(
+    name="MTEB(Scandinavian, v2)",
+    aliases=["SEB2"],
+    display_name="Scandinavian",
+    icon="https://github.com/lipis/flag-icons/raw/260c91531be024944c6514130c5defb2ebb02b7d/flags/4x3/dk.svg",
+    language_view=["dan-Latn", "swe-Latn", "nno-Latn", "nob-Latn"],
+    tasks=get_tasks(
+        tasks=[
+            # Bitext
+            "BornholmBitextMining",
+            "NorwegianCourtsBitextMining",
+            # Classification
+            "AngryTweetsClassification.v2",
+            "DanishPoliticalCommentsClassification.v2",
+            "DalajClassification.v2",
+            "DKHateClassification.v2",
+            "LccSentimentClassification",
+            "MassiveIntentClassification",
+            "MassiveScenarioClassification",
+            "NordicLangClassification",
+            "NoRecClassification.v2",
+            "NorwegianParliamentClassification.v2",
+            "ScalaClassification",
+            "SwedishSentimentClassification.v2",
+            "SweRecClassification.v2",
+            # Retrieval
+            "DanFeverRetrieval",
+            "NorQuadRetrieval",
+            "SNLRetrieval",
+            "SwednRetrieval",
+            "SweFaqRetrieval",
+            "TV2Nordretrieval",
+            "TwitterHjerneRetrieval",
+            # Clustering
+            "SNLHierarchicalClusteringS2S",
+            "SNLHierarchicalClusteringP2P",
+            "SwednClusteringP2P",
+            "SwednClusteringS2S",
+            "VGHierarchicalClusteringS2S",
+            "VGHierarchicalClusteringP2P",
+        ],
+        languages=["dan", "swe", "nno", "nob"],
+    ),
+    description="A curated selection of tasks coverering the Scandinavian languages; Danish, Swedish and Norwegian, including Bokmål and Nynorsk.",
+    reference="https://kennethenevoldsen.github.io/scandinavian-embedding-benchmark/",
+    citation=r"""
+@article{enevoldsenScandinavianEmbeddingBenchmarks2024,
+  author = {Enevoldsen, Kenneth and Kardos, Márton and Muennighoff, Niklas and Nielbo, Kristoffer},
+  language = {en},
+  month = feb,
+  shorttitle = {The {Scandinavian} {Embedding} {Benchmarks}},
+  title = {The {Scandinavian} {Embedding} {Benchmarks}: {Comprehensive} {Assessment} of {Multilingual} and {Monolingual} {Text} {Embedding}},
+  url = {https://openreview.net/forum?id=pJl_i7HIA72},
+  urldate = {2024-04-12},
+  year = {2024},
+}
+""",
+    contacts=["KennethEnevoldsen", "x-tabdeveloping", "Samoed"],
+)
+
+NEB = Benchmark(
+    name="MTEB(Norwegian, v1)",
+    aliases=["NEB"],
+    display_name="Norwegian",
+    icon="https://github.com/lipis/flag-icons/raw/260c91531be024944c6514130c5defb2ebb02b7d/flags/4x3/dk.svg",
+    language_view=["nno-Latn", "nob-Latn"],
+    tasks=get_tasks(
+        tasks=[
+            # Bitext
+            "NorwegianCourtsBitextMining",
+            # Classification
+            "MassiveIntentClassification",
+            "MassiveScenarioClassification",
+            "NordicLangClassification",
+            "NoRecClassification.v2",
+            "NorwegianParliamentClassification.v2",
+            "ScalaClassification",
+            # Retrieval
+            "NorQuadRetrieval",
+            "SNLRetrieval",
+            # Clustering
+            "SNLHierarchicalClusteringS2S",
+            "SNLHierarchicalClusteringP2P",
+            "VGHierarchicalClusteringS2S",
+            "VGHierarchicalClusteringP2P",
+        ],
+        languages=["nno", "nob"],
+    ),
+    description="A curated selection of tasks coverering the Scandinavian languages; Danish, Swedish and Norwegian, including Bokmål and Nynorsk.",
+    reference="https://kennethenevoldsen.github.io/scandinavian-embedding-benchmark/",
+    citation=r"""
+@article{enevoldsenScandinavianEmbeddingBenchmarks2024,
+  author = {Enevoldsen, Kenneth and Kardos, Márton and Muennighoff, Niklas and Nielbo, Kristoffer},
+  language = {en},
+  month = feb,
+  shorttitle = {The {Scandinavian} {Embedding} {Benchmarks}},
+  title = {The {Scandinavian} {Embedding} {Benchmarks}: {Comprehensive} {Assessment} of {Multilingual} and {Monolingual} {Text} {Embedding}},
+  url = {https://openreview.net/forum?id=pJl_i7HIA72},
+  urldate = {2024-04-12},
+  year = {2024},
+}
+""",
+    contacts=["KennethEnevoldsen", "x-tabdeveloping", "Samoed"],
+)

@@ -57,6 +57,8 @@ from mteb.benchmarks.benchmarks.benchmarks import (
     MTEB_multilingual_v1,
     MTEB_multilingual_v2,
     RAR_b,
+    SEB2,
+    NEB,
 )
 from mteb.benchmarks.benchmarks.rteb_benchmarks import (
     RTEB_CODE,
