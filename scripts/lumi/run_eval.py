@@ -2,6 +2,7 @@ import argparse
 import mteb
 from mteb.models.vllm_wrapper import VllmEncoderWrapper
 from pathlib import Path
+from sentence_transformers import SentenceTransformer
 
 if __name__ == "__main__":
 
@@ -16,10 +17,14 @@ if __name__ == "__main__":
     # Select model
     if args.vllm:
         try:
-            model = VllmEncoderWrapper(model=args.model, trust_remote_code=True, gpu_memory_utilization=0.3)
+            model = VllmEncoderWrapper(model=args.model, trust_remote_code=True, gpu_memory_utilization=0.95)
         except Exception:
             print("No VLLM implementation, falling back on MTEB backend!")
-            model = mteb.get_model(args.model, trust_remote_code=True)
+            try:
+                model = mteb.get_model(args.model, trust_remote_code=True)
+            except Exception:
+                print("Failed to load model from MTEB backend, falling back on SentenceTransformer!")
+                model = SentenceTransformer(args.model, trust_remote_code=True)
     else:
         model = mteb.get_model(args.model, trust_remote_code=True)
 

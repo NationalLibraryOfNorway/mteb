@@ -18,5 +18,11 @@ results = cache.load_results(
 )
 benchmark_scores_df = results.get_benchmark_result()
 print(benchmark_scores_df)
+# res = cache.load_results(
+#     models=["NbAiLab/nb-sbert-base", "NbAiLab/nb-sbert-borealis-270m"],
+#     tasks=benchmark,
+#     load_experiments=True
+# )
+# print(res.to_dataframe(include_model_revision=True))
 if args.save:
     benchmark_scores_df.to_csv(args.output_file)
