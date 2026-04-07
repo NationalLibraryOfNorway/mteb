@@ -3,8 +3,8 @@
 # Usage: ./update_table.sh [BENCHMARK]
 #   BENCHMARK: NEB or SEB2 (default: NEB)
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/config.sh"
+# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "/scratch/project_465002270/nb-embed/mteb/scripts/lumi_refactor/config.sh"
 
 source "$VENV"
 

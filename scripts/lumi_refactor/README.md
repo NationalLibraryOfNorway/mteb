@@ -35,6 +35,16 @@ If your cluster paths change, edit only `config.sh`.
 
 ## Usage
 
+Generate a new `run_evals.sh` for selected models:
+
+```bash
+cd scripts/lumi_refactor
+python3 create_eval_sh.py -m \
+  NbAiLab/nb-sbert-base-normalized \
+  NbAiLab/nb-sbert-base-dense-normalized \
+  NbAiLab/nb-sbert-base-cls-normalized
+```
+
 Run evaluations directly:
 
 ```bash
@@ -71,21 +81,8 @@ sbatch update_table.slurm NEB
 sbatch update_table.slurm SEB2
 ```
 
-Generate a new `run_evals.sh` for selected models:
+Start an interactive job on the GPU nodes:
 
 ```bash
-cd scripts/lumi_refactor
-python create_eval_sh.py -m \
-  NbAiLab/nb-sbert-base-normalized \
-  NbAiLab/nb-sbert-base-dense-normalized \
-  NbAiLab/nb-sbert-base-cls-normalized
+srun --account=project_465002270 --partition=dev-g --gpus=1 --time=03:00:00 --nodes=1 --pty bash
 ```
-
-## Migration Notes
-
-Replaced old duplicated scripts:
-
-- `update_NEB_table.sh` and `update_SEB2_table.sh` -> `update_table.sh`
-- `update_NEB_table.slurm` and `update_SEB2_table.slurm` -> `update_table.slurm`
-
-The original scripts under `scripts/lumi` are unchanged.
