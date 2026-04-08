@@ -3,7 +3,7 @@
 # Usage: sbatch update_table.slurm [BENCHMARK]
 #   BENCHMARK: NEB or SEB2 (default: NEB)
 #SBATCH --job-name=Table_Update
-#SBATCH --account=project_465002270
+#SBATCH --account=project_465002893
 #SBATCH --time=1:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -17,7 +17,7 @@
 set -euo pipefail
 
 # SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "/scratch/project_465002270/nb-embed/mteb/scripts/lumi_refactor/config.sh"
+source "/scratch/project_465002893/nb-embed/mteb/scripts/lumi_refactor/config.sh"
 
 mkdir -p slurm_logs
 
@@ -29,4 +29,6 @@ export TORCH_COMPILE_DISABLE=1
 
 BENCHMARK=${1:-NEB}
 
-singularity exec "$SIF" ./update_table.sh "$BENCHMARK"
+echo "$VENV"
+
+singularity exec -B $VENV:/user-software:image-src=/ "$SIF" ./update_table.sh "$BENCHMARK"

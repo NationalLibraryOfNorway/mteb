@@ -164,3 +164,6 @@ powermetrics_log.txt
 CLAUDE.md
 
 *.tex
+
+slurm_logs/
+venv.sqsh

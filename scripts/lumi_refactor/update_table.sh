@@ -6,9 +6,9 @@
 # SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "/scratch/project_465002270/nb-embed/mteb/scripts/lumi_refactor/config.sh"
 
-source "$VENV"
-
 BENCHMARK=${1:-NEB}
+
+pip list
 
 python get_results_table.py \
     -c "$CACHE" \

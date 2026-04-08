@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=MTEB_Eval
-#SBATCH --account=project_465002270
+#SBATCH --account=project_465002893
 #SBATCH --time=03:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -16,7 +16,7 @@ set -euo pipefail
 # SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # source "$SCRIPT_DIR/config.sh"
 
-source "/scratch/project_465002270/nb-embed/mteb/scripts/lumi_refactor/config.sh"
+source "/scratch/project_465002893/nb-embed/mteb/scripts/lumi_refactor/config.sh"
 
 mkdir -p slurm_logs
 
@@ -26,4 +26,4 @@ module load lumi-aif-singularity-bindings
 export HIP_VISIBLE_DEVICES=0
 export TORCH_COMPILE_DISABLE=1
 
-singularity exec "$SIF" ./run_evals.sh
+singularity exec -B $VENV:/user-software:image-src=/ "$SIF" ./run_evals.sh
