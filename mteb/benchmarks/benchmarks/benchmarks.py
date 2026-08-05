@@ -3,8 +3,11 @@ from mteb.benchmarks.benchmark import (
     HUMEBenchmark,
     MIEBBenchmark,
     VidoreBenchmark,
+    RtebBenchmark
 )
 from mteb.get_tasks import MTEBTasks, get_task, get_tasks
+
+removal_note = "\n\nNote: We have temporarily removed the 'Private' column to read more about this decision out the [announcement](https://github.com/embeddings-benchmark/mteb/issues/3934)."
 
 MMTEB_CITATION = r"""@article{enevoldsen2025mmtebmassivemultilingualtext,
   author = {Kenneth Enevoldsen and Isaac Chung and Imene Kerboua and Márton Kardos and Ashwin Mathur and David Stap and Jay Gala and Wissam Siblini and Dominik Krzemiński and Genta Indra Winata and Saba Sturua and Saiteja Utpala and Mathieu Ciancone and Marion Schaeffer and Gabriel Sequeira and Diganta Misra and Shreeya Dhakal and Jonathan Rystrøm and Roman Solomatin and Ömer Çağatan and Akash Kundu and Martin Bernstorff and Shitao Xiao and Akshita Sukhlecha and Bhavish Pahwa and Rafał Poświata and Kranthi Kiran GV and Shawon Ashraf and Daniel Auras and Björn Plüster and Jan Philipp Harries and Loïc Magne and Isabelle Mohr and Mariya Hendriksen and Dawei Zhu and Hippolyte Gisserot-Boukhlef and Tom Aarsen and Jan Kostkan and Konrad Wojtasik and Taemin Lee and Marek Šuppa and Crystina Zhang and Roberta Rocca and Mohammed Hamdy and Andrianos Michail and John Yang and Manuel Faysse and Aleksei Vatolin and Nandan Thakur and Manan Dey and Dipam Vasani and Pranjal Chitale and Simone Tedeschi and Nguyen Tai and Artem Snegirev and Michael Günther and Mengzhou Xia and Weijia Shi and Xing Han Lù and Jordan Clive and Gayatri Krishnakumar and Anna Maksimova and Silvan Wehrli and Maria Tikhonova and Henil Panchal and Aleksandr Abramov and Malte Ostendorff and Zheng Liu and Simon Clematide and Lester James Miranda and Alena Fenogenova and Guangyu Song and Ruqiya Bin Safi and Wen-Ding Li and Alessia Borghini and Federico Cassano and Hongjin Su and Jimmy Lin and Howard Yen and Lasse Hansen and Sara Hooker and Chenghao Xiao and Vaibhav Adlakha and Orion Weller and Siva Reddy and Niklas Muennighoff},
@@ -15,6 +18,13 @@ MMTEB_CITATION = r"""@article{enevoldsen2025mmtebmassivemultilingualtext,
   url = {https://arxiv.org/abs/2502.13595},
   year = {2025},
 }"""
+
+RTEB_CITATION = r"""@article{rteb2025,
+  author = {Liu, Frank and Enevoldsen, Kenneth and Solomatin, Roman and Chung, Isaac and Aarsen, Tom and Fődi, Zoltán},
+  title = {Introducing RTEB: A New Standard for Retrieval Evaluation},
+  year = {2025},
+}"""
+
 
 MTEB_EN = Benchmark(
     name="MTEB(eng, v2)",
@@ -3360,4 +3370,46 @@ NEB = Benchmark(
 }
 """,
     contacts=["KennethEnevoldsen", "x-tabdeveloping", "Samoed"],
+)
+
+RTEB_CITATION = r"""@article{rteb2025,
+  author = {Liu, Frank and Enevoldsen, Kenneth and Solomatin, Roman and Chung, Isaac and Aarsen, Tom and Fődi, Zoltán},
+  title = {Introducing RTEB: A New Standard for Retrieval Evaluation},
+  year = {2025},
+}"""
+
+RTEB_ENGLISH = RtebBenchmark(
+    name="RTEB(eng, beta)",
+    display_name="RTEB English",
+    icon="https://github.com/lipis/flag-icons/raw/refs/heads/main/flags/4x3/us.svg",
+    tasks=get_tasks(
+        tasks=[
+            "AILACasedocs",
+            "AILAStatutes",
+            "LegalSummarization",
+            "FinanceBenchRetrieval",
+            "HC3FinanceRetrieval",
+            "FinQARetrieval",
+            "AppsRetrieval",
+            "DS1000Retrieval",
+            "HumanEvalRetrieval",
+            "MBPPRetrieval",
+            "WikiSQLRetrieval",
+            "FreshStackRetrieval",
+            "ChatDoctorRetrieval",
+            "CUREv1",
+            # Closed datasets
+            "Code1Retrieval",
+            "EnglishFinance1Retrieval",
+            "EnglishFinance2Retrieval",
+            "EnglishFinance3Retrieval",
+            "EnglishFinance4Retrieval",
+            "EnglishHealthcare1Retrieval",
+        ],
+        languages=["eng"],
+    ),
+    description="RTEB English is a subset of RTEB containing retrieval tasks in English across legal, finance, code, and healthcare domains. Includes diverse tasks covering specialized domains such as healthcare and finance. The benchmark includes both open and closed datasets, providing a robust evaluation framework for real-world applications. To submit results on private tasks, please create [open an issue](https://github.com/embeddings-benchmark/mteb/issues)."
+    + removal_note,
+    citation=RTEB_CITATION,
+    contacts=["fzowl"],
 )

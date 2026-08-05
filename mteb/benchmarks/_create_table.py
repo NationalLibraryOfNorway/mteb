@@ -169,7 +169,7 @@ def _create_summary_table_from_benchmark_results(
 
     # Add markdown links to model names
     name_w_link = (
-        "[" + joint_table["model_name"] + "](" + joint_table["model_link"] + ")"
+        "[" + joint_table["model_name"] + "](" + str(joint_table["model_link"]) + ")"
     )
     joint_table["model_name"] = joint_table["model_name"].mask(
         joint_table["model_link"].notna(), name_w_link
@@ -366,7 +366,7 @@ def _create_summary_table_mean_public_private(
         borda_per_task = per_task[public_task_name]
     else:
         borda_per_task = per_task
-    joint_table["borda_rank"] = _get_borda_rank(borda_per_task)
+    joint_table["borda_rank"] = _get_borda_rank(borda_per_task)[0]
     joint_table = joint_table.sort_values("borda_rank", ascending=True)
     joint_table = joint_table.reset_index()
 
@@ -406,7 +406,7 @@ def _create_summary_table_mean_public_private(
 
     # Add markdown links to model names
     name_w_link = (
-        "[" + joint_table["model_name"] + "](" + joint_table["model_link"] + ")"
+        "[" + str(joint_table["model_name"]) + "](" + str(joint_table["model_link"]) + ")"
     )
     joint_table["model_name"] = joint_table["model_name"].mask(
         joint_table["model_link"].notna(), name_w_link
