@@ -63,7 +63,7 @@ def _sanitize_model(
 
     wrapped_model: MTEBModels | ModelMeta
     if isinstance(model, SentenceTransformer):
-        wrapped_model = SentenceTransformerEncoderWrapper(model)
+        wrapped_model = SentenceTransformerEncoderWrapper(model, revision=model.model_card_data.revision)
         meta = wrapped_model.mteb_model_meta
     elif isinstance(model, CrossEncoder):
         wrapped_model = CrossEncoderWrapper(model)

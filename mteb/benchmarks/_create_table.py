@@ -169,7 +169,7 @@ def _create_summary_table_from_benchmark_results(
 
     # Add markdown links to model names
     name_w_link = (
-        "[" + joint_table["model_name"] + "](" + str(joint_table["model_link"]) + ")"
+        "[" + str(joint_table["model_name"]) + "](" + str(joint_table["model_link"]) + ")"
     )
     joint_table["model_name"] = joint_table["model_name"].mask(
         joint_table["model_link"].notna(), name_w_link
@@ -366,7 +366,9 @@ def _create_summary_table_mean_public_private(
         borda_per_task = per_task[public_task_name]
     else:
         borda_per_task = per_task
-    joint_table["borda_rank"] = _get_borda_rank(borda_per_task)[0]
+    borda_rank, mean_rank = _get_borda_rank(per_task)
+    joint_table["borda_rank"] = borda_rank
+    joint_table["mean_rank"] = mean_rank
     joint_table = joint_table.sort_values("borda_rank", ascending=True)
     joint_table = joint_table.reset_index()
 
@@ -487,7 +489,9 @@ def _create_summary_table_mean_subset(
     # Build joint table
     joint_table = mean_per_type.copy()
     joint_table.insert(0, "mean(subset)", overall_subset_mean)
-    joint_table["borda_rank"] = _get_borda_rank(per_subset)
+    borda_rank, mean_rank = _get_borda_rank(per_task)
+    joint_table["borda_rank"] = borda_rank
+    joint_table["mean_rank"] = mean_rank
     joint_table = joint_table.sort_values("mean(subset)", ascending=False)
     joint_table = joint_table.reset_index()
 
@@ -534,7 +538,7 @@ def _create_summary_table_mean_subset(
 
     # Add markdown links to model names
     name_w_link = (
-        "[" + joint_table["model_name"] + "](" + joint_table["model_link"] + ")"
+        "[" + str(joint_table["model_name"]) + "](" + str(joint_table["model_link"]) + ")"
     )
     joint_table["model_name"] = joint_table["model_name"].mask(
         joint_table["model_link"].notna(), name_w_link
@@ -607,7 +611,9 @@ def _create_summary_table_mean_task_type(
     joint_table = mean_per_type.copy()
     joint_table.insert(0, "mean_by_task_type", typed_mean)
     joint_table = joint_table.sort_values("mean_by_task_type", ascending=False)
-    joint_table["borda_rank"] = _get_borda_rank(per_task)
+    borda_rank, mean_rank = _get_borda_rank(per_task)
+    joint_table["borda_rank"] = borda_rank
+    joint_table["mean_rank"] = mean_rank
     joint_table["rank"] = [i + 1 for i in range(len(joint_table))]
     joint_table = joint_table.reset_index()
 
@@ -652,7 +658,7 @@ def _create_summary_table_mean_task_type(
 
     # Add markdown links to model names
     name_w_link = (
-        "[" + joint_table["model_name"] + "](" + joint_table["model_link"] + ")"
+        "[" + str(joint_table["model_name"]) + "](" + str(joint_table["model_link"]) + ")"
     )
     joint_table["model_name"] = joint_table["model_name"].mask(
         joint_table["model_link"].notna(), name_w_link

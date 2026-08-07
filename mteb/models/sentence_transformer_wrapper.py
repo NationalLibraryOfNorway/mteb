@@ -78,6 +78,7 @@ class SentenceTransformerEncoderWrapper(AbsEncoder):
             self.model = model
 
         self.mteb_model_meta = ModelMeta.from_sentence_transformer_model(self.model)
+        self.mteb_model_meta.revision = revision or self.model.model_card_data.revision
 
         built_in_prompts = getattr(self.model, "prompts", None)
         if built_in_prompts and not model_prompts:
